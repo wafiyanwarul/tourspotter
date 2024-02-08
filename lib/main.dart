@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tourspotter/pages/detail_screen_page.dart';
+// import 'package:tourspotter/pages/detail_screen_page.dart';
+
+import 'pages/main_screen_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const DetailScreenPage(),
+      home: const MainScreenPage(),
     );
   }
 }
