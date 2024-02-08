@@ -3,10 +3,17 @@ import 'package:flutter/material.dart';
 
 import '../model/tourism_place_model.dart';
 
-class DetailScreenPage extends StatelessWidget {
+var informationTextStyle = const TextStyle(fontFamily: 'Oxygen');
+
+class DetailScreenPage extends StatefulWidget {
   final TourismPlace place;
   const DetailScreenPage({Key? key, required this.place}) : super(key: key);
 
+  @override
+  State<DetailScreenPage> createState() => _DetailScreenPageState();
+}
+
+class _DetailScreenPageState extends State<DetailScreenPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +26,40 @@ class DetailScreenPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 // Image of Place
-                Image.asset(place.imageAsset),
+                Stack(
+                  children: [
+                    Container(
+                      // padding: EdgeInsets.symmetric(horizontal: 30),
+                      child: ClipRRect(
+                        // borderRadius: BorderRadius.circular(25),
+                        child: Image.asset(widget.place.imageAsset),
+                      ),
+                    ),
+                    SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.arrow_back,
+                                  color: Colors.black,
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ),
+                            const FavoriteButton(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 // Image.network(
                 //     'https://grahanurdian.com/pic/2022/03/farmhouse-susu-lembang.webp'),
 
@@ -27,7 +67,7 @@ class DetailScreenPage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: Text(
-                    place.name,
+                    widget.place.name,
                     // 'Farm House Lembang',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
@@ -51,7 +91,7 @@ class DetailScreenPage extends StatelessWidget {
                           const Icon(Icons.calendar_today, size: 30),
                           Text(
                             // 'Access time',
-                            place.openDays,
+                            widget.place.openDays,
                             style: informationTextStyle,
                           )
                         ],
@@ -62,7 +102,7 @@ class DetailScreenPage extends StatelessWidget {
                         children: [
                           const Icon(CupertinoIcons.clock, size: 30),
                           Text(
-                            place.openTime,
+                            widget.place.openTime,
                             style: informationTextStyle,
                           )
                         ],
@@ -73,7 +113,7 @@ class DetailScreenPage extends StatelessWidget {
                         children: [
                           const Icon(Icons.monetization_on, size: 30),
                           Text(
-                            place.ticketPrice,
+                            widget.place.ticketPrice,
                             style: informationTextStyle,
                           )
                         ],
@@ -88,7 +128,7 @@ class DetailScreenPage extends StatelessWidget {
                     vertical: 20,
                   ),
                   child: Text(
-                    place.description,
+                    widget.place.description,
                     textAlign: TextAlign.justify,
                     // 'Berada di jalur utama Bandung - Lembang, Farm House menjadi objek wisata yang tidak pernah sepi pengunjung. Selain karena letaknya strategis kawasan ini juga menghadirkan nuansa wisata khas Eropa. Semua itu diterapkan dalam bentuk swafoto instagramale.',
                     // style: TextStyle(),
@@ -99,7 +139,7 @@ class DetailScreenPage extends StatelessWidget {
                   height: 150,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
-                    children: place.imageUrls.map((url) {
+                    children: widget.place.imageUrls.map((url) {
                       return Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: ClipRRect(
@@ -158,4 +198,28 @@ class DetailScreenPage extends StatelessWidget {
   }
 }
 
-var informationTextStyle = const TextStyle(fontFamily: 'Oxygen');
+class FavoriteButton extends StatefulWidget {
+  const FavoriteButton({Key? key}) : super(key: key);
+
+  @override
+  _FavoriteButtonState createState() => _FavoriteButtonState();
+}
+
+class _FavoriteButtonState extends State<FavoriteButton> {
+  bool isFavorite = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        isFavorite ? Icons.favorite : Icons.favorite_border,
+        color: Colors.red,
+      ),
+      onPressed: () {
+        setState(() {
+          isFavorite = !isFavorite;
+        });
+      },
+    );
+  }
+}

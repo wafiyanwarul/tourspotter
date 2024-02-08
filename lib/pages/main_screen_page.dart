@@ -14,7 +14,14 @@ class _MainScreenPageState extends State<MainScreenPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Wisata Bandung'),
+        title: const Text(
+          'Wisata Bandung',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontFamily: 'Oxygen',
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
       body: ListView.builder(
         itemBuilder: (context, index) {
@@ -31,7 +38,16 @@ class _MainScreenPageState extends State<MainScreenPage> {
                 children: <Widget>[
                   Expanded(
                     flex: 1,
-                    child: Image.asset(place.imageAsset),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(place.imageAsset),
+                        ),
+                      ),
+                    ),
                   ),
                   Expanded(
                     flex: 2,
@@ -42,12 +58,12 @@ class _MainScreenPageState extends State<MainScreenPage> {
                         children: <Widget>[
                           Text(
                             place.name,
-                            style: const TextStyle(fontSize: 16.0),
+                            style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.w900),
                           ),
                           const SizedBox(
                             height: 10,
                           ),
-                          Text(place.location),
+                          Text('Lokasi : ${place.location}'),
                         ],
                       ),
                     ),
@@ -58,7 +74,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
           );
         },
         itemCount: tourismPlaceList.length,
-      ), 
+      ),
       // ListView.builder(
       //   itemBuilder: (context, index) {
       //     final TourismPlace place = tourismPlaceList[index];
