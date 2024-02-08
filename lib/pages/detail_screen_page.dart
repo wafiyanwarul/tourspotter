@@ -26,7 +26,7 @@ class DetailScreenPage extends StatelessWidget {
 class DetailWebPage extends StatefulWidget {
   final TourismPlace place;
 
-  DetailWebPage({Key? key, required this.place}) : super(key: key);
+  const DetailWebPage({Key? key, required this.place}) : super(key: key);
 
   @override
   State<DetailWebPage> createState() => _DetailWebPageState();
@@ -65,8 +65,8 @@ class _DetailWebPageState extends State<DetailWebPage> {
                       child: Column(
                         children: [
                           ClipRRect(
-                            child: Image.asset(widget.place.imageAsset),
                             borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(widget.place.imageAsset),
                           ),
                           const SizedBox(height: 16),
                           Scrollbar(
