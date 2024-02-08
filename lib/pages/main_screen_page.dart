@@ -15,7 +15,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Wisata Bandung',
+          'Wisata Bandung', //Size: ${MediaQuery.of(context).size.width}',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontFamily: 'Oxygen',
@@ -23,9 +23,97 @@ class _MainScreenPageState extends State<MainScreenPage> {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          final TourismPlace place = tourismPlaceList[index];
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if (constraints.maxWidth <= 600) {
+            return const TourismPlaceList();
+          } else if (constraints.maxWidth <= 1000) {
+            return const TourismPlaceGrid(gridCount: 4);
+          } else {
+            return const TourismPlaceGrid(gridCount: 6);
+          }
+        },
+      ),
+    );
+  }
+}
+
+class TourismPlaceList extends StatelessWidget {
+  const TourismPlaceList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        final TourismPlace place = tourismPlaceList[index];
+        return InkWell(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return DetailScreenPage(place: place);
+            }));
+          },
+          child: Card(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset(place.imageAsset),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          place.name,
+                          style: const TextStyle(
+                              fontSize: 16.0, fontWeight: FontWeight.w900),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text('Lokasi : ${place.location}'),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+      itemCount: tourismPlaceList.length,
+    );
+  }
+}
+
+// Screen When the Menu of Place are grid
+class TourismPlaceGrid extends StatelessWidget {
+  final int gridCount;
+
+  const TourismPlaceGrid({Key? key, required this.gridCount}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: GridView.count(
+        crossAxisCount: gridCount,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+        children: tourismPlaceList.map((place) {
           return InkWell(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -33,92 +121,38 @@ class _MainScreenPageState extends State<MainScreenPage> {
               }));
             },
             child: Card(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
                   Expanded(
-                    flex: 1,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset(place.imageAsset),
-                        ),
+                    child: Image.asset(
+                      place.imageAsset,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text(
+                      place.name,
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  Expanded(
-                    flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            place.name,
-                            style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.w900),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text('Lokasi : ${place.location}'),
-                        ],
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
+                    child: Text(
+                      place.location,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
           );
-        },
-        itemCount: tourismPlaceList.length,
+        }).toList(),
       ),
-      // ListView.builder(
-      //   itemBuilder: (context, index) {
-      //     final TourismPlace place = tourismPlaceList[index];
-      //     return InkWell(
-      //       onTap: () {
-      //         Navigator.push(context, MaterialPageRoute(builder: (context) {
-      //           return const DetailScreenPage();
-      //         }));
-      //       },
-      //       child: Card(
-      //         child: Row(
-      //           crossAxisAlignment: CrossAxisAlignment.start,
-      //           children: <Widget>[
-      //             Expanded(
-      //               flex: 1,
-      //               child: Image.network(
-      //                   'https://grahanurdian.com/pic/2022/03/farmhouse-susu-lembang.webp'),
-      //             ),
-      //             const Expanded(
-      //               flex: 2,
-      //               child: Padding(
-      //                 padding: EdgeInsets.all(8.0),
-      //                 child: Column(
-      //                   crossAxisAlignment: CrossAxisAlignment.start,
-      //                   mainAxisSize: MainAxisSize.min,
-      //                   children: <Widget>[
-      //                     Text(
-      //                       'Farm House Lembang',
-      //                       style: TextStyle(fontSize: 16.0),
-      //                     ),
-      //                     SizedBox(
-      //                       height: 10,
-      //                     ),
-      //                     Text('Lembang'),
-      //                   ],
-      //                 ),
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     );
-      //   },
-      // ),
     );
   }
 }
