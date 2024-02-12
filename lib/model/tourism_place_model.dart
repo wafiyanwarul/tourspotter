@@ -157,14 +157,14 @@ var tourismPlaceList = [
     ],
   ),
   TourismPlace(
-    name: 'Farm House Lembang',
-    location: 'Lembang',
+    name: 'Kawah Ijen',
+    location: 'Banyuwangi',
     description:
-        'Berada di jalur utama Bandung-Lembang, Farm House menjadi objek wisata yang tidak pernah sepi pengunjung. Selain karena letaknya strategis, kawasan ini juga menghadirkan nuansa wisata khas Eropa. Semua itu diterapkan dalam bentuk spot swafoto Instagramable.',
+        'Kawah Ijen, berada di Banyuwangi, Jawa Timur, menawarkan pengalaman alam yang menakjubkan. Terkenal dengan api birunya yang mempesona dan pemandangan kawah yang dramatis, ini adalah tempat yang wajib dikunjungi bagi para petualang dan pecinta alam. Pendakian ke kawah membawa pengunjung melintasi lereng gunung yang hijau subur dan hutan yang indah. Begitu mencapai puncak, pengunjung akan terpesona oleh keindahan danau kawah yang berwarna biru, serta bisa menyaksikan para penambang belerang lokal dalam aksinya.',
     openDays: 'Open Everyday',
     openTime: '09:00 - 20:00',
     ticketPrice: 'Rp 25000',
-    imageAsset: 'assets/images/farm-house.jpg',
+    imageAsset: 'assets/images/kawah-ijen.png',
     imageUrls: [
       'https://media-cdn.tripadvisor.com/media/photo-s/0d/7c/59/70/farmhouse-lembang.jpg',
       'https://media-cdn.tripadvisor.com/media/photo-w/13/f0/22/f6/photo3jpg.jpg',
@@ -172,14 +172,14 @@ var tourismPlaceList = [
     ],
   ),
   TourismPlace(
-    name: 'Observatorium Bosscha',
-    location: 'Lembang',
+    name: 'Tugu Monas',
+    location: 'Jakarta Pusat',
     description:
-        'Memiliki beberapa teleskop, antara lain, Refraktor Ganda Zeiss, Schmidt Bimasakti, Refraktor Bamberg, Cassegrain GOTO, dan Teleskop Surya. Refraktor Ganda Zeiss adalah jenis teleskop terbesar untuk meneropong bintang. Benda ini diletakkan pada atap kubah sehingga saat teropong digunakan, atap tersebut harus dibuka. Observatorium Bosscha boleh dikunjungi oleh siapa pun, tanpa tiket. Namun, bagi yang ingin menggunakan teleskop Zeiss, wajib mendaftarkan diri. Untuk instansi atau lembaga pendidikan, diberikan jadwal hari Selasa sampai Jumat. Sementara itu, kunjungan individu dibuka setiap hari Sabtu.',
+        'Monumen Nasional, atau yang biasa disebut Monas, adalah ikon Jakarta yang mengesankan dengan puncaknya yang menjulang tinggi. Berlokasi di pusat kota, Monas menawarkan pengunjung panorama kota yang menakjubkan. Dikelilingi oleh taman yang hijau dan kolam air mancur, monumen ini menjadi tempat populer untuk bersantai dan berfoto. Dengan lift yang membawa pengunjung ke atas, mereka dapat menikmati pemandangan spektakuler dari ketinggian, serta menjelajahi museum yang berisi sejarah dan artefak penting.',
     openDays: 'Open Tuesday - Saturday',
     openTime: '09:00 - 14:30',
     ticketPrice: 'Rp 20000',
-    imageAsset: 'assets/images/bosscha.jpg',
+    imageAsset: 'assets/images/tugu-monas.png',
     imageUrls: [
       'https://media-cdn.tripadvisor.com/media/photo-o/12/6b/63/0b/bosscha-observatory.jpg',
       'https://media-cdn.tripadvisor.com/media/photo-p/0d/6a/88/9b/photo3jpg.jpg',
